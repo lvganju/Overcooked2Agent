@@ -1,0 +1,107 @@
+HANDOFF 01
+轨迹与任务事件接口交接指南
+环境组向数据组交付可验证、可重放、可用于任务倾向标注的标准轨迹。
+负责单元
+环境与轨迹负责人
+输入门槛
+COLE Platform 可启动
+核心输出
+platform_data_handoff_v2
+交接对象
+数据组
+
+交接目标  数据组不需要阅读环境内部实现，就能从历史状态识别玩家行为，并从未来状态核验五类成功任务事件；轨迹本身不直接声称玩家意图。
+
+语义边界  环境组不负责判断 no_commitment 或 unknown。前者是数据组构造的“尚未承诺任务”监督语义，后者是无法可靠监督的无效窗口；环境组只交付足够完整的历史和事件证据。
+
+所需资料与权威来源
+COLE Platform 官方仓库 — 经典 Overcooked 人机实验平台、轨迹保存与冻结策略入口
+COLE 论文介绍页 — 核对 COLE 方法边界、实验设定与论文信息
+COLE 论文 PDF — 方法和实验细节
+Human-Aware RL — 经典 Overcooked 策略及旧 TensorFlow 接口
+Overcooked-AI — 状态、动作、布局、规划和事件定义
+从环境开始：本组开工操作
+先做这一件事  先把自己的运行环境和上一交接包的最小测试跑通，再开始改代码。不要在无法复现输入的情况下直接开发。
+
+1. 建立本组独立环境
+新建并激活 `cole-platform（Python 3.7 旧栈）`；把 Python、Conda、操作系统和关键包版本写入 setup_log.md。
+复制上一组交接包到只读输入目录；记录交接包版本、文件哈希和来源提交，不直接改写上一组文件。
+阅读 README、HANDOFF_REPORT、schema/config 和 known_issues，列出缺失文件与不一致项。
+执行第一个最小测试：启动网页，完成一局真人 + 冻结 COLE，并保存非空轨迹
+测试通过后保存完整命令、退出码和日志；失败时保存完整首个 traceback，不用截图代替文本日志。
+git rev-parse HEAD python --version conda env export > environment_lock.yml
+分步任务与阶段交接
+阶段 E1：冻结仓库、模型和动作语义
+记录 COLE Platform 提交哈希、checkpoint 路径和布局；COLE 只推理，不更新权重。
+用实际代码核对 up/down/right/left/stay/interact 的编号和玩家索引，生成 action_spec.json。
+保存一个固定 state 到 cole_action 的推理样例和耗时。
+阶段 E2：冻结 trajectory_schema_v2
+字段
+形式
+交接用途
+episode_id, timestep
+string, int
+边界、连续性和拆分
+layout_id, seed, human_index
+string/int
+环境复现和主体识别
+state
+JSON object
+重放和事件检测的权威输入
+human_action
+int
+历史行为特征；本身不是任务标签
+cole_action, final_ai_action
+int, int
+比较冻结策略与最终动作
+team_reward, done
+float, bool
+结果和终止
+events
+list of objects
+只记录可由状态变化证明的成功事件
+
+阶段 E3：实现五类成功任务事件
+事件
+必须有的状态变化证据
+ingredient_acquired
+玩家手持物从空变为 onion
+ingredient_put_in_pot
+手持洋葱消失且目标锅内数量增加
+plate_acquired
+玩家手持物从空变为 dish
+soup_plated
+玩家手持 dish 变为 soup，目标锅状态相应变化
+soup_delivered
+玩家手持 soup 消失且订单/奖励发生一致变化
+
+禁止  不要在环境组轨迹里把“向锅边移动”直接写成 put_in_pot 意图。环境组只交付行为和可验证事件；任务倾向标签由数据组根据时间窗口构造。
+
+阶段 E4：验证与样例
+运行字段、动作范围、时间连续性和 state 可序列化检查。
+重放一局并核对终态、累计奖励和五类事件。
+每类事件交付至少 5 个正例与 5 个相邻负例，保存事件前后状态。
+给数据组现场演示：相同的移动行为可能通向不同任务，因此历史行为与任务事件必须分层保存。
+正式交接与验收
+交接包名称：platform_data_handoff_v2    接收方：数据组
+必须交接的文件
+platform_data_handoff_v2/ ├── README_RUN.md ├── HANDOFF_REPORT.md ├── repo_commit.txt ├── environment_lock.yml ├── observation_spec.json ├── action_spec.json ├── trajectory_schema_v2.json ├── task_event_spec_v2.md ├── sample_episode.jsonl ├── event_audit.jsonl ├── replay_episode.py ├── validate_raw_trajectory.py └── logs/
+接收方现场验收
+在新终端启动环境并完成一局；轨迹非空。
+运行 validate_raw_trajectory.py，零退出码。
+重放 sample_episode.jsonl，终态、奖励和事件一致。
+随机抽查五类事件各一例并解释状态变化证据。
+确认 schema 不包含由环境组猜测的 intent_label。
+交接完成判据  接收方在新终端或新环境中按 README 运行成功，机器可读验证脚本通过，并在 HANDOFF_REPORT.md 中记录版本、已通过项、未完成项和已知限制。
+
+如何让 AI 按当前进度指导
+必须上传  将本组目录中的 `AGENTS.md` 与当前代码一起上传。若工具支持仓库级 AGENTS.md，应把它放在本组工作目录根部；普通对话则手动上传。
+
+上传本组 AGENTS.md。
+上传本指南和上一组的 HANDOFF_REPORT.md。
+上传当前代码、配置和目录树，不要只描述文件名。
+上传最近一次完整命令、完整首个报错及工作目录。
+上传当前阶段证据：setup_log、提交哈希、动作映射、轨迹样例、事件审计和重放日志。
+要求 AI 先判断当前阶段和缺失证据，本轮只推进一个验收门槛。
+推荐开场消息
+请先读取 01_环境组/AGENTS.md、本工作指南和上一组 HANDOFF_REPORT。 请根据实际文件判断我当前阶段，指出缺失证据；本轮只推进下一个验收门槛。 修改前先读代码，修改后运行最小测试，并列出本次新增或更新的交接文件。
