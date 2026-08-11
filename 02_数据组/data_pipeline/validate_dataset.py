@@ -19,12 +19,75 @@ import argparse
 import json
 from pathlib import Path
 
-from build_features import FEATURE_DIM
+import numpy as np
+
 from sequence_dataset import SequenceDataset
-from validate_interface import validate_file, EXPECTED_HISTORY_WINDOW
+
+# 本脚本随交接包一起发给 Agent 组，交接包内不含数据组内部的 build_features.py /
+# validate_interface.py（那两个是数据组生成侧的内部工具）。为保证接收方拿到
+# cole_task_intent_v0.2/ 目录后不依赖数据组仓库其余代码即可独立验收，这里把
+# FEATURE_DIM/EXPECTED_HISTORY_WINDOW 固化为 training_interface_v0.2.md 冻结的
+# 常量，并内联 validate_interface.py 的逐行校验逻辑。
+FEATURE_DIM = 28
+EXPECTED_HISTORY_WINDOW = 5
+VALID_TARGETS = {-1, 0, 1, 2, 3, 4, 5}
+REQUIRED_FIELDS = {
+    "episode_id", "timestep", "layout_id", "history_mask", "features",
+    "intent_target", "classification_mask", "label_name", "subject_id", "seed",
+}
 
 FORBIDDEN_INPUT_FIELDS = {"events", "team_reward", "done", "steps_to_event", "intent_target",
                           "classification_mask", "label_name"}
+
+
+def validate_file(path: Path) -> int:
+    """逐行接口一致性校验（与数据组内部 validate_interface.py 规则一致）。"""
+    n_rows = 0
+    with open(path, "r", encoding="utf-8") as fh:
+        for line_no, line in enumerate(fh, start=1):
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            n_rows += 1
+
+            missing = REQUIRED_FIELDS - row.keys()
+            assert not missing, f"{path}:{line_no} missing fields {missing}"
+
+            features = row["features"]
+            mask = row["history_mask"]
+            assert len(features) == EXPECTED_HISTORY_WINDOW, (
+                f"{path}:{line_no} features window length {len(features)} != {EXPECTED_HISTORY_WINDOW}"
+            )
+            assert len(mask) == EXPECTED_HISTORY_WINDOW, (
+                f"{path}:{line_no} history_mask length {len(mask)} != {EXPECTED_HISTORY_WINDOW}"
+            )
+            for step_vec in features:
+                assert len(step_vec) == FEATURE_DIM, (
+                    f"{path}:{line_no} feature vector dim {len(step_vec)} != {FEATURE_DIM}"
+                )
+                arr = np.asarray(step_vec, dtype=np.float32)
+                assert np.isfinite(arr).all(), f"{path}:{line_no} NaN/Inf detected in features"
+
+            intent_target = row["intent_target"]
+            assert intent_target in VALID_TARGETS, f"{path}:{line_no} invalid intent_target={intent_target}"
+
+            classification_mask = row["classification_mask"]
+            if intent_target == -1:
+                assert classification_mask is False, (
+                    f"{path}:{line_no} intent_target=-1 but classification_mask={classification_mask}"
+                )
+            else:
+                assert classification_mask is True, (
+                    f"{path}:{line_no} intent_target={intent_target} but classification_mask={classification_mask}"
+                )
+
+            for i, valid in enumerate(mask):
+                if not valid:
+                    assert all(v == 0.0 for v in features[i]), (
+                        f"{path}:{line_no} history_mask[{i}]=False but features[{i}] not all-zero"
+                    )
+    return n_rows
 
 
 def check_label_map(dataset_dir: Path) -> None:

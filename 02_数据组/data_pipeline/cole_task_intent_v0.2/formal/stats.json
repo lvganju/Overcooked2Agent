@@ -1,0 +1,180 @@
+{
+  "schema_version": "cole_task_intent_v0.2_formal_real_model",
+  "total_rows": 16000,
+  "num_classification_rows": 15400,
+  "classification_row_ratio": 0.9625,
+  "label_counts_overall": {
+    "get_ingredient": 4344,
+    "put_in_pot": 4003,
+    "no_commitment": 2377,
+    "get_plate": 1764,
+    "plate_food": 1894,
+    "deliver": 1018,
+    "unknown/invalid": 600
+  },
+  "label_counts_classification_only": {
+    "get_ingredient": 4344,
+    "put_in_pot": 4003,
+    "no_commitment": 2377,
+    "get_plate": 1764,
+    "plate_food": 1894,
+    "deliver": 1018
+  },
+  "class_imbalance_ratio_max_over_min": 4.267,
+  "label_counts_by_subject_id": {
+    "real_model_selfplay_COLE": {
+      "get_ingredient": 983,
+      "put_in_pot": 847,
+      "no_commitment": 181,
+      "get_plate": 333,
+      "plate_food": 480,
+      "deliver": 256,
+      "unknown/invalid": 120
+    },
+    "real_model_selfplay_FCP": {
+      "get_ingredient": 760,
+      "put_in_pot": 746,
+      "get_plate": 304,
+      "no_commitment": 763,
+      "plate_food": 325,
+      "deliver": 182,
+      "unknown/invalid": 120
+    },
+    "real_model_selfplay_MEP": {
+      "get_ingredient": 700,
+      "put_in_pot": 647,
+      "get_plate": 423,
+      "no_commitment": 876,
+      "plate_food": 293,
+      "deliver": 141,
+      "unknown/invalid": 120
+    },
+    "real_model_selfplay_PBT": {
+      "get_ingredient": 909,
+      "put_in_pot": 834,
+      "no_commitment": 218,
+      "get_plate": 385,
+      "plate_food": 469,
+      "deliver": 265,
+      "unknown/invalid": 120
+    },
+    "real_model_selfplay_SP": {
+      "get_ingredient": 992,
+      "put_in_pot": 929,
+      "no_commitment": 339,
+      "get_plate": 319,
+      "plate_food": 327,
+      "deliver": 174,
+      "unknown/invalid": 120
+    }
+  },
+  "avg_history_window_coverage": 0.995,
+  "splits_summary": {
+    "train": {
+      "num_episodes": 30,
+      "num_rows": 12000,
+      "label_counts": {
+        "get_ingredient": 3205,
+        "put_in_pot": 2951,
+        "no_commitment": 1876,
+        "get_plate": 1346,
+        "plate_food": 1416,
+        "deliver": 756,
+        "unknown/invalid": 450
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 2400,
+        "real_model_selfplay_FCP": 2400,
+        "real_model_selfplay_MEP": 2400,
+        "real_model_selfplay_PBT": 2400,
+        "real_model_selfplay_SP": 2400
+      },
+      "episode_ids": [
+        "real-cole-random1-3002",
+        "real-cole-random1-3003",
+        "real-cole-random1-3004",
+        "real-cole-random1-3005",
+        "real-cole-random1-3006",
+        "real-cole-random1-3007",
+        "real-fcp-random1-3000",
+        "real-fcp-random1-3002",
+        "real-fcp-random1-3003",
+        "real-fcp-random1-3004",
+        "real-fcp-random1-3006",
+        "real-fcp-random1-3007",
+        "real-mep-random1-3001",
+        "real-mep-random1-3002",
+        "real-mep-random1-3003",
+        "real-mep-random1-3004",
+        "real-mep-random1-3005",
+        "real-mep-random1-3006",
+        "real-pbt-random1-3000",
+        "real-pbt-random1-3001",
+        "real-pbt-random1-3002",
+        "real-pbt-random1-3004",
+        "real-pbt-random1-3006",
+        "real-pbt-random1-3007",
+        "real-sp-random1-3000",
+        "real-sp-random1-3001",
+        "real-sp-random1-3002",
+        "real-sp-random1-3003",
+        "real-sp-random1-3005",
+        "real-sp-random1-3007"
+      ]
+    },
+    "val": {
+      "num_episodes": 5,
+      "num_rows": 2000,
+      "label_counts": {
+        "get_ingredient": 552,
+        "put_in_pot": 518,
+        "get_plate": 214,
+        "plate_food": 279,
+        "deliver": 155,
+        "no_commitment": 207,
+        "unknown/invalid": 75
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 400,
+        "real_model_selfplay_FCP": 400,
+        "real_model_selfplay_MEP": 400,
+        "real_model_selfplay_PBT": 400,
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-cole-random1-3000",
+        "real-fcp-random1-3005",
+        "real-mep-random1-3007",
+        "real-pbt-random1-3005",
+        "real-sp-random1-3006"
+      ]
+    },
+    "test": {
+      "num_episodes": 5,
+      "num_rows": 2000,
+      "label_counts": {
+        "get_ingredient": 587,
+        "put_in_pot": 534,
+        "no_commitment": 294,
+        "get_plate": 204,
+        "plate_food": 199,
+        "deliver": 107,
+        "unknown/invalid": 75
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 400,
+        "real_model_selfplay_FCP": 400,
+        "real_model_selfplay_MEP": 400,
+        "real_model_selfplay_PBT": 400,
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-cole-random1-3001",
+        "real-fcp-random1-3001",
+        "real-mep-random1-3000",
+        "real-pbt-random1-3003",
+        "real-sp-random1-3004"
+      ]
+    }
+  }
+}

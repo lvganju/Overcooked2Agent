@@ -1,0 +1,134 @@
+{
+  "schema_version": "cole_task_intent_v0.2_smoke",
+  "total_rows": 12000,
+  "num_classification_rows": 11550,
+  "classification_row_ratio": 0.9625,
+  "label_counts_overall": {
+    "get_ingredient": 2086,
+    "put_in_pot": 1266,
+    "no_commitment": 5412,
+    "get_plate": 1913,
+    "plate_food": 450,
+    "deliver": 423,
+    "unknown/invalid": 450
+  },
+  "label_counts_classification_only": {
+    "get_ingredient": 2086,
+    "put_in_pot": 1266,
+    "no_commitment": 5412,
+    "get_plate": 1913,
+    "plate_food": 450,
+    "deliver": 423
+  },
+  "class_imbalance_ratio_max_over_min": 12.794,
+  "label_counts_by_subject_id": {
+    "scripted_chef_greedy": {
+      "get_ingredient": 918,
+      "put_in_pot": 945,
+      "no_commitment": 1509,
+      "get_plate": 1575,
+      "plate_food": 420,
+      "deliver": 408,
+      "unknown/invalid": 225
+    },
+    "random_scripted": {
+      "no_commitment": 3903,
+      "get_ingredient": 1168,
+      "put_in_pot": 321,
+      "unknown/invalid": 225,
+      "get_plate": 338,
+      "plate_food": 30,
+      "deliver": 15
+    }
+  },
+  "avg_history_window_coverage": 0.995,
+  "splits_summary": {
+    "train": {
+      "num_episodes": 20,
+      "num_rows": 8000,
+      "label_counts": {
+        "get_ingredient": 1429,
+        "put_in_pot": 891,
+        "no_commitment": 3592,
+        "get_plate": 1194,
+        "plate_food": 310,
+        "deliver": 284,
+        "unknown/invalid": 300
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 4000,
+        "random_scripted": 4000
+      },
+      "episode_ids": [
+        "chef-simple-2002",
+        "chef-simple-2003",
+        "chef-simple-2005",
+        "chef-simple-2006",
+        "chef-simple-2007",
+        "chef-simple-2008",
+        "chef-simple-2009",
+        "chef-simple-2012",
+        "chef-simple-2013",
+        "chef-simple-2014",
+        "smoke-simple-1002",
+        "smoke-simple-1004",
+        "smoke-simple-1005",
+        "smoke-simple-1006",
+        "smoke-simple-1007",
+        "smoke-simple-1008",
+        "smoke-simple-1009",
+        "smoke-simple-1010",
+        "smoke-simple-1012",
+        "smoke-simple-1013"
+      ]
+    },
+    "val": {
+      "num_episodes": 4,
+      "num_rows": 1600,
+      "label_counts": {
+        "get_ingredient": 237,
+        "put_in_pot": 126,
+        "no_commitment": 762,
+        "get_plate": 304,
+        "plate_food": 56,
+        "deliver": 55,
+        "unknown/invalid": 60
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 800,
+        "random_scripted": 800
+      },
+      "episode_ids": [
+        "chef-simple-2004",
+        "chef-simple-2011",
+        "smoke-simple-1003",
+        "smoke-simple-1011"
+      ]
+    },
+    "test": {
+      "num_episodes": 6,
+      "num_rows": 2400,
+      "label_counts": {
+        "get_ingredient": 420,
+        "put_in_pot": 249,
+        "no_commitment": 1058,
+        "get_plate": 415,
+        "plate_food": 84,
+        "deliver": 84,
+        "unknown/invalid": 90
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 1200,
+        "random_scripted": 1200
+      },
+      "episode_ids": [
+        "chef-simple-2000",
+        "chef-simple-2001",
+        "chef-simple-2010",
+        "smoke-simple-1000",
+        "smoke-simple-1001",
+        "smoke-simple-1014"
+      ]
+    }
+  }
+}

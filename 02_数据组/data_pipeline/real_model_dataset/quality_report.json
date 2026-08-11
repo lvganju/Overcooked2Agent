@@ -1,0 +1,124 @@
+{
+  "schema_version": "cole_task_intent_v0.2_formal_real_model",
+  "history_window": 5,
+  "future_window": 15,
+  "feature_dim": 28,
+  "num_episodes_discovered": 40,
+  "num_invalid_manifest_skipped": 0,
+  "splits": {
+    "train": {
+      "num_episodes": 30,
+      "num_rows": 12000,
+      "label_counts": {
+        "get_ingredient": 3205,
+        "put_in_pot": 2951,
+        "no_commitment": 1876,
+        "get_plate": 1346,
+        "plate_food": 1416,
+        "deliver": 756,
+        "unknown/invalid": 450
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 2400,
+        "real_model_selfplay_FCP": 2400,
+        "real_model_selfplay_MEP": 2400,
+        "real_model_selfplay_PBT": 2400,
+        "real_model_selfplay_SP": 2400
+      },
+      "episode_ids": [
+        "real-cole-random1-3002",
+        "real-cole-random1-3003",
+        "real-cole-random1-3004",
+        "real-cole-random1-3005",
+        "real-cole-random1-3006",
+        "real-cole-random1-3007",
+        "real-fcp-random1-3000",
+        "real-fcp-random1-3002",
+        "real-fcp-random1-3003",
+        "real-fcp-random1-3004",
+        "real-fcp-random1-3006",
+        "real-fcp-random1-3007",
+        "real-mep-random1-3001",
+        "real-mep-random1-3002",
+        "real-mep-random1-3003",
+        "real-mep-random1-3004",
+        "real-mep-random1-3005",
+        "real-mep-random1-3006",
+        "real-pbt-random1-3000",
+        "real-pbt-random1-3001",
+        "real-pbt-random1-3002",
+        "real-pbt-random1-3004",
+        "real-pbt-random1-3006",
+        "real-pbt-random1-3007",
+        "real-sp-random1-3000",
+        "real-sp-random1-3001",
+        "real-sp-random1-3002",
+        "real-sp-random1-3003",
+        "real-sp-random1-3005",
+        "real-sp-random1-3007"
+      ]
+    },
+    "val": {
+      "num_episodes": 5,
+      "num_rows": 2000,
+      "label_counts": {
+        "get_ingredient": 552,
+        "put_in_pot": 518,
+        "get_plate": 214,
+        "plate_food": 279,
+        "deliver": 155,
+        "no_commitment": 207,
+        "unknown/invalid": 75
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 400,
+        "real_model_selfplay_FCP": 400,
+        "real_model_selfplay_MEP": 400,
+        "real_model_selfplay_PBT": 400,
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-cole-random1-3000",
+        "real-fcp-random1-3005",
+        "real-mep-random1-3007",
+        "real-pbt-random1-3005",
+        "real-sp-random1-3006"
+      ]
+    },
+    "test": {
+      "num_episodes": 5,
+      "num_rows": 2000,
+      "label_counts": {
+        "get_ingredient": 587,
+        "put_in_pot": 534,
+        "no_commitment": 294,
+        "get_plate": 204,
+        "plate_food": 199,
+        "deliver": 107,
+        "unknown/invalid": 75
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_COLE": 400,
+        "real_model_selfplay_FCP": 400,
+        "real_model_selfplay_MEP": 400,
+        "real_model_selfplay_PBT": 400,
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-cole-random1-3001",
+        "real-fcp-random1-3001",
+        "real-mep-random1-3000",
+        "real-pbt-random1-3003",
+        "real-sp-random1-3004"
+      ]
+    }
+  },
+  "known_limitations": [
+    "本批次使用 COLE-Platform 官方发布的 5 个真实 checkpoint（SP/PBT/FCP/MEP/COLE），复用环境组自带的 pantheonrl/tf_utils.py::get_agent_from_saved_model 加载器（未修改），在 'random1' 布局上做自对弈（human 与队友使用同一 checkpoint）。",
+    "BC（behavioural cloning）模型未接入：其加载路径依赖 stable-baselines GAIL 的 .load()，与本项目 requirements 的 stable-baselines3/torch 生态不完全对齐，需要单独适配验证，本轮范围裁剪未包含，属于已知缺口（六个模型中缺 1 个）。",
+    "本轮为自对弈（同一 checkpoint 对同一 checkpoint），不是 5 个模型互相交叉对战；交叉对战（如 SP vs COLE）留作后续扩展，当前先验证真实模型行为下标签/特征/拆分链路的正确性。subject_id 因此按 checkpoint 名称区分（'real_model_selfplay_<MODEL>'），同一 subject_id 下双方智能体完全同分布，不含跨策略配对的多样性。",
+    "布局仅覆盖 'random1' 单一 layout（六个 checkpoint 官方发布的其中一套权重对应此布局），未覆盖其他 5 个 random 布局或该 checkpoint 未训练过的布局。",
+    "空锅不出现在 state.objects 中，特征集无法还原到最近锅的相对距离（见 feature_spec.md），此限制与生成策略无关，是环境组交接接口的固有限制。"
+  ],
+  "episode_overlap_across_splits": []
+}

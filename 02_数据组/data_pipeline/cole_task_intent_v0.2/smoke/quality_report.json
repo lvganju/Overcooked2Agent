@@ -1,0 +1,104 @@
+{
+  "schema_version": "cole_task_intent_v0.2_smoke",
+  "history_window": 5,
+  "future_window": 15,
+  "feature_dim": 28,
+  "num_episodes_discovered": 30,
+  "num_invalid_manifest_skipped": 0,
+  "splits": {
+    "train": {
+      "num_episodes": 20,
+      "num_rows": 8000,
+      "label_counts": {
+        "get_ingredient": 1429,
+        "put_in_pot": 891,
+        "no_commitment": 3592,
+        "get_plate": 1194,
+        "plate_food": 310,
+        "deliver": 284,
+        "unknown/invalid": 300
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 4000,
+        "random_scripted": 4000
+      },
+      "episode_ids": [
+        "chef-simple-2002",
+        "chef-simple-2003",
+        "chef-simple-2005",
+        "chef-simple-2006",
+        "chef-simple-2007",
+        "chef-simple-2008",
+        "chef-simple-2009",
+        "chef-simple-2012",
+        "chef-simple-2013",
+        "chef-simple-2014",
+        "smoke-simple-1002",
+        "smoke-simple-1004",
+        "smoke-simple-1005",
+        "smoke-simple-1006",
+        "smoke-simple-1007",
+        "smoke-simple-1008",
+        "smoke-simple-1009",
+        "smoke-simple-1010",
+        "smoke-simple-1012",
+        "smoke-simple-1013"
+      ]
+    },
+    "val": {
+      "num_episodes": 4,
+      "num_rows": 1600,
+      "label_counts": {
+        "get_ingredient": 237,
+        "put_in_pot": 126,
+        "no_commitment": 762,
+        "get_plate": 304,
+        "plate_food": 56,
+        "deliver": 55,
+        "unknown/invalid": 60
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 800,
+        "random_scripted": 800
+      },
+      "episode_ids": [
+        "chef-simple-2004",
+        "chef-simple-2011",
+        "smoke-simple-1003",
+        "smoke-simple-1011"
+      ]
+    },
+    "test": {
+      "num_episodes": 6,
+      "num_rows": 2400,
+      "label_counts": {
+        "get_ingredient": 420,
+        "put_in_pot": 249,
+        "no_commitment": 1058,
+        "get_plate": 415,
+        "plate_food": 84,
+        "deliver": 84,
+        "unknown/invalid": 90
+      },
+      "subject_row_counts": {
+        "scripted_chef_greedy": 1200,
+        "random_scripted": 1200
+      },
+      "episode_ids": [
+        "chef-simple-2000",
+        "chef-simple-2001",
+        "chef-simple-2010",
+        "smoke-simple-1000",
+        "smoke-simple-1001",
+        "smoke-simple-1014"
+      ]
+    }
+  },
+  "known_limitations": [
+    "本 smoke 批次仅使用两类生成策略：'scripted_chef_greedy'（手工确定性走位脚本，保证覆盖全部五类事件）与 'random_scripted'（均匀随机动作），均不是六个训练模型（BC/SP/PBT/FCP/MEP/COLE）的真实行为分布。正式数据集生成前必须补充真实模型checkpoint 的 policy_adapter 适配，否则模型学到的将是脚本化行为而非真实人机协作模式。",
+    "scripted_chef_greedy 在同一 episode 内高度重复（7 次相同循环），事件间隔规律，不代表真实玩家的时间不确定性；仅用于验证标签器/特征构造/拆分链路的正确性。",
+    "布局仅覆盖 'simple' 单一 layout，未覆盖 random0-3/unident 等其他布局的几何多样性。",
+    "空锅不出现在 state.objects 中，特征集无法还原到最近锅的相对距离（见 feature_spec.md）。"
+  ],
+  "episode_overlap_across_splits": []
+}

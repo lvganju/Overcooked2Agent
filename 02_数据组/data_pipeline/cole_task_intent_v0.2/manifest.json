@@ -1,0 +1,167 @@
+{
+  "package_name": "cole_task_intent_v0.2",
+  "version": "cole_task_intent_v0.2",
+  "generated_at_utc": "2026-08-11T02:49:36.029855+00:00",
+  "generator": {
+    "python_version": "3.7.16",
+    "platform": "Windows-10-10.0.26100-SP0"
+  },
+  "handoff_from": "数据组 (Data Team)",
+  "handoff_to": "Agent 组 (Agent Team)",
+  "handoff_reference_doc": "02_数据组/交接03_任务级意图数据集_数据组到Agent组.md",
+  "data_lines": {
+    "smoke": {
+      "description": "脚本化生成的验证数据（scripted_chef_greedy + random_scripted，layout=simple），用于验证标签器/特征构造/拆分/训练接口链路的正确性，不代表真实模型行为分布，不建议直接用于正式模型训练。",
+      "source_generator": "generate_scripted_chef_batch.py / generate_smoke_batch.py"
+    },
+    "formal": {
+      "description": "COLE-Platform 官方 5 个真实 checkpoint（SP/PBT/FCP/MEP/COLE，缺 BC）在 layout=random1 上自对弈生成的真实轨迹数据，是本交接包的正式训练数据。",
+      "source_generator": "generate_real_model_batch.py",
+      "models_included": [
+        "SP",
+        "PBT",
+        "FCP",
+        "MEP",
+        "COLE"
+      ],
+      "models_excluded": [
+        "BC"
+      ],
+      "exclusion_reason": "BC 依赖 stable-baselines GAIL 的 .load()，与本项目 requirements 的 stable-baselines3/torch 生态不完全对齐，需要单独适配验证，本轮范围裁剪未包含。"
+    }
+  },
+  "label_schema_version": "v0.2",
+  "files": [
+    {
+      "path": "feature_spec.md",
+      "size_bytes": 4630,
+      "sha256": "00c516cb97c22f65b60d7cd1edb7476421141bf18184314db836e52c8fdc0d74"
+    },
+    {
+      "path": "formal/quality_report.json",
+      "size_bytes": 4839,
+      "sha256": "11d8e48d90e9c8f1fbc64f257a8669f32ff91d20b901f86ad43e9405b9db4362"
+    },
+    {
+      "path": "formal/stats.json",
+      "size_bytes": 5031,
+      "sha256": "b729036ed2ba8a0520dd0b79fb9513ffad1779672504d1e47ae8f09760628e87"
+    },
+    {
+      "path": "formal/test.jsonl",
+      "size_bytes": 1997446,
+      "sha256": "7de0821bddf955b05e26b316ae459d874c98cbb77ec7ecea83d7f5351ddf4685"
+    },
+    {
+      "path": "formal/test.parquet",
+      "size_bytes": 50390,
+      "sha256": "82d32cb5fd6c843e2a9a60546b364ab51f729b788c3ab698ca1c0b3e777c493c"
+    },
+    {
+      "path": "formal/train.jsonl",
+      "size_bytes": 11982897,
+      "sha256": "ba54b64c51fd1a8e9cfb0d1a1ec29da098069c06429297347c73f6db0b04c3e7"
+    },
+    {
+      "path": "formal/train.parquet",
+      "size_bytes": 242442,
+      "sha256": "3ea6e6dac827ed1b6cd295aed8e5aad89ab202db111fd184d64de4827dfee174"
+    },
+    {
+      "path": "formal/val.jsonl",
+      "size_bytes": 1996699,
+      "sha256": "78b89e53d671630814c5a7d50595a235c599209125c4aa8be229b5e2c0029071"
+    },
+    {
+      "path": "formal/val.parquet",
+      "size_bytes": 50684,
+      "sha256": "40e776df4d973d072c889d4b22f8cd490f9fed5f04ff5ede693aa4d501dbbe47"
+    },
+    {
+      "path": "HANDOFF_REPORT.md",
+      "size_bytes": 8455,
+      "sha256": "8b678640370e77c61aacf4057299445ee3b0a9e94dd5deff5046bd93ea5c4b18"
+    },
+    {
+      "path": "label_definitions.md",
+      "size_bytes": 9981,
+      "sha256": "37ccb07ad6c782396314f37642fbf7261f9105063dfdbe19011b9af5c55526a6"
+    },
+    {
+      "path": "label_map.json",
+      "size_bytes": 200,
+      "sha256": "3aef908c1adff6183f079802a70206b346482c0c5cd5cfcb55d11e3fe99d2fad"
+    },
+    {
+      "path": "no_commitment_audit.jsonl",
+      "size_bytes": 5509,
+      "sha256": "033cb2d43808093d842fce60490770338fed48a06b725d76df0d4668b3e538c7"
+    },
+    {
+      "path": "sample_batch.npz",
+      "size_bytes": 22080,
+      "sha256": "a6cb073de7f1e812fc2f058a48dde61edb19db46c13817e47ec1c47403e7f8a1"
+    },
+    {
+      "path": "sequence_dataset.py",
+      "size_bytes": 4961,
+      "sha256": "997cecf5c0aa27f93aba8ca1ca1c8c33a0f0bb7f8a0509167960981da8791481"
+    },
+    {
+      "path": "smoke/quality_report.json",
+      "size_bytes": 3431,
+      "sha256": "f1d8153d1f315331458ccceb6e7e5a748a95b270a4fad6b7e7ec997fe6fd5f32"
+    },
+    {
+      "path": "smoke/stats.json",
+      "size_bytes": 3430,
+      "sha256": "1d9740e66f761f2dc64888ac8fcab35f28329abb8c20ede6679d37deed3c1fff"
+    },
+    {
+      "path": "smoke/test.jsonl",
+      "size_bytes": 2376476,
+      "sha256": "ef3c4f1887fbf00b17f0258a0bcf5acf82aa084ffd1463834d9e36299807121a"
+    },
+    {
+      "path": "smoke/test.parquet",
+      "size_bytes": 41207,
+      "sha256": "e450175d604e062bc2148e18a5542be5fa0b66e65cc2a8219295d59f257d4563"
+    },
+    {
+      "path": "smoke/train.jsonl",
+      "size_bytes": 7923167,
+      "sha256": "9b4503d758d8cced3ba5fc88a60f71fb56e8a88874ebd58631cabd4d7df46ca1"
+    },
+    {
+      "path": "smoke/train.parquet",
+      "size_bytes": 115429,
+      "sha256": "321f3a58fd06d82cbf784ba00ea810046a10829227d64068061274fc191a577a"
+    },
+    {
+      "path": "smoke/val.jsonl",
+      "size_bytes": 1583777,
+      "sha256": "5074c7982e7e1e63164d827ce01038596579d80017f1a75d439f737995b66c5a"
+    },
+    {
+      "path": "smoke/val.parquet",
+      "size_bytes": 31087,
+      "sha256": "a1d83e6c3a0f9814b9c4ff5d6081c6bd375bcb2487f448cbec3f85563f830b48"
+    },
+    {
+      "path": "split_protocol.md",
+      "size_bytes": 2510,
+      "sha256": "c76d8600a00ead25fc85ce668454afe022b1c95d835c0f85709d7b20d6d720f2"
+    },
+    {
+      "path": "training_interface_v0.2.md",
+      "size_bytes": 4116,
+      "sha256": "13d8f2f972f59975695523b84c0e542299af7621fb566e0f7cfd38d668cfe7e8"
+    },
+    {
+      "path": "validate_dataset.py",
+      "size_bytes": 8056,
+      "sha256": "9630806a82b3c02457de1638fb1d1fd519916a6f350afb097fbdbea26bf427b3"
+    }
+  ],
+  "num_files": 26
+}
