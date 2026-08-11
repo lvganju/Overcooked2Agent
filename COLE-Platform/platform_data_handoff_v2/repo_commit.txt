@@ -1,0 +1,6 @@
+status=UNAVAILABLE
+reason=This project copy and its inspected parent directories do not contain .git/HEAD.
+checked_worktree=C:\Users\admin\Desktop\zzz\COLE-Platform-main\COLE-Platform-main
+checked_parents=C:\Users\admin\Desktop\zzz\COLE-Platform-main;C:\Users\admin\Desktop\zzz;C:\Users\admin\Desktop
+required_resolution=Provide a Git clone containing .git metadata or provide the authoritative commit SHA from the project owner.
+source_integrity_fallback=action_spec.json records SHA-256 hashes for the authoritative action source files.

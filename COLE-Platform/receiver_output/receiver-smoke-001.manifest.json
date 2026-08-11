@@ -1,0 +1,16 @@
+{
+  "episode_id": "receiver-smoke-001",
+  "layout_id": "simple",
+  "seed": 7,
+  "human_index": 0,
+  "ego_agent_idx": 0,
+  "horizon": 10,
+  "status": "valid",
+  "termination_reason": "horizon_reached",
+  "steps_recorded": 10,
+  "trajectory_path": "receiver_output\\receiver-smoke-001.trajectory.jsonl",
+  "controller_enabled": false,
+  "models_loaded": false,
+  "training_run": false,
+  "elapsed_seconds": 0.08268499374389648
+}

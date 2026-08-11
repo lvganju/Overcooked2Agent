@@ -1,0 +1,14 @@
+{
+  "episode_id": "chef-simple-2003",
+  "layout_id": "simple",
+  "seed": 2003,
+  "human_index": 0,
+  "ego_agent_idx": 0,
+  "horizon": 400,
+  "policy_id": "scripted_chef_greedy",
+  "status": "valid",
+  "termination_reason": "environment_done",
+  "steps_recorded": 400,
+  "trajectory_path": "C:\\Users\\36724\\PycharmProjects\\WelcomeScreen\\Overcooked2Agent\\02_数据组\\data_pipeline\\smoke_raw\\chef\\chef-simple-2003.trajectory.jsonl",
+  "elapsed_seconds": 0.1892836093902588
+}

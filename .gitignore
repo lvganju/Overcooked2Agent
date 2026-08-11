@@ -1,0 +1,15 @@
+# 预训练 checkpoint（COLE-Platform 官方发布，体积过大，含 >100MB 单文件，不适合直接进 git）
+models/
+
+# IDE
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Environment episode manifest",
+  "type": "object",
+  "required": [
+    "episode_id", "layout_id", "seed", "human_index", "ego_agent_idx",
+    "horizon", "status", "termination_reason", "steps_recorded",
+    "trajectory_path", "controller_enabled", "models_loaded", "training_run"
+  ],
+  "properties": {
+    "episode_id": {"type": "string", "minLength": 1},
+    "layout_id": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer"},
+    "human_index": {"type": "integer", "enum": [0, 1]},
+    "ego_agent_idx": {"type": "integer", "enum": [0, 1]},
+    "horizon": {"type": "integer", "minimum": 1},
+    "status": {"type": "string", "enum": ["valid", "invalid_episode"]},
+    "termination_reason": {"type": "string", "minLength": 1},
+    "steps_recorded": {"type": "integer", "minimum": 0},
+    "trajectory_path": {"type": "string"},
+    "controller_enabled": {"type": "boolean"},
+    "models_loaded": {"type": "boolean"},
+    "training_run": {"type": "boolean"},
+    "elapsed_seconds": {"type": "number", "minimum": 0}
+  },
+  "additionalProperties": false
+}

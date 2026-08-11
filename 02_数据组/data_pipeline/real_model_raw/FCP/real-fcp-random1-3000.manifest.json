@@ -1,0 +1,14 @@
+{
+  "episode_id": "real-fcp-random1-3000",
+  "layout_id": "random1",
+  "seed": 3000,
+  "human_index": 0,
+  "ego_agent_idx": 0,
+  "horizon": 400,
+  "policy_id": "real_model_selfplay_FCP",
+  "status": "valid",
+  "termination_reason": "environment_done",
+  "steps_recorded": 400,
+  "trajectory_path": "C:\\Users\\36724\\PycharmProjects\\WelcomeScreen\\Overcooked2Agent\\02_数据组\\data_pipeline\\real_model_raw\\FCP\\real-fcp-random1-3000.trajectory.jsonl",
+  "elapsed_seconds": 169.77387523651123
+}

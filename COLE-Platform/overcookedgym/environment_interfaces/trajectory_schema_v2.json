@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trajectory_schema_v2.json",
+  "title": "COLE Platform trajectory schema v2",
+  "type": "object",
+  "required": [
+    "schema_version", "ep_states", "ep_actions", "ep_rewards",
+    "ep_dones", "ep_events", "ep_final_states", "step_records"
+  ],
+  "properties": {
+    "schema_version": {"const": "trajectory_schema_v2"},
+    "ep_states": {"$ref": "#/$defs/episodeArrays"},
+    "ep_actions": {"$ref": "#/$defs/episodeArrays"},
+    "ep_rewards": {"$ref": "#/$defs/episodeArrays"},
+    "ep_dones": {"$ref": "#/$defs/episodeArrays"},
+    "ep_events": {"$ref": "#/$defs/episodeArrays"},
+    "ep_final_states": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/state"}
+    },
+    "step_records": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": {"$ref": "#/$defs/stepRecord"}
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "episodeArrays": {
+      "type": "array",
+      "items": {"type": "array"}
+    },
+    "action": {"type": "integer", "minimum": 0, "maximum": 5},
+    "state": {
+      "type": "object",
+      "required": ["players", "objects", "order_list"],
+      "properties": {
+        "players": {"type": "array", "minItems": 2},
+        "objects": {"type": ["array", "object"]},
+        "order_list": {"type": ["array", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "event": {
+      "type": "object",
+      "required": ["event_type", "timestep", "agent_index", "details"],
+      "properties": {
+        "event_type": {
+          "enum": [
+            "ingredient_acquired", "ingredient_put_in_pot", "plate_acquired",
+            "soup_plated", "soup_delivered"
+          ]
+        },
+        "timestep": {"type": "integer", "minimum": 0},
+        "agent_index": {"type": "integer", "enum": [0, 1]},
+        "details": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "stepRecord": {
+      "type": "object",
+      "required": [
+        "episode_id", "timestep", "layout_id", "seed", "human_index",
+        "state", "human_action", "cole_action", "final_ai_action",
+        "team_reward", "done", "events"
+      ],
+      "properties": {
+        "episode_id": {"type": "string", "minLength": 1},
+        "timestep": {"type": "integer", "minimum": 0},
+        "layout_id": {"type": "string", "minLength": 1},
+        "seed": {"type": "integer"},
+        "human_index": {"type": "integer", "enum": [0, 1]},
+        "state": {"$ref": "#/$defs/state"},
+        "human_action": {"$ref": "#/$defs/action"},
+        "cole_action": {"$ref": "#/$defs/action"},
+        "final_ai_action": {"$ref": "#/$defs/action"},
+        "team_reward": {"type": "number"},
+        "done": {"type": "boolean"},
+        "events": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/event"}
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

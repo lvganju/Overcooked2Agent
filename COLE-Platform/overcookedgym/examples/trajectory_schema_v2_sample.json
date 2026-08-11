@@ -1,0 +1,44 @@
+{
+  "schema_version": "trajectory_schema_v2",
+  "ep_states": [[{
+    "players": [
+      {"position": [1, 1], "orientation": [1, 0], "held_object": null},
+      {"position": [4, 1], "orientation": [-1, 0], "held_object": null}
+    ],
+    "objects": [],
+    "order_list": null
+  }]],
+  "ep_actions": [[[5, 4]]],
+  "ep_rewards": [[0]],
+  "ep_dones": [[false]],
+  "ep_events": [[[{"event_type": "ingredient_acquired", "timestep": 0, "agent_index": 0, "details": {"ingredient": "onion", "source": "dispenser"}}]]],
+  "ep_final_states": [{
+    "players": [
+      {"position": [1, 1], "orientation": [1, 0], "held_object": {"name": "onion", "position": [1, 1], "state": null}},
+      {"position": [4, 1], "orientation": [-1, 0], "held_object": null}
+    ],
+    "objects": [],
+    "order_list": null
+  }],
+  "step_records": [[{
+    "episode_id": "minimal-example",
+    "timestep": 0,
+    "layout_id": "simple",
+    "seed": 1,
+    "human_index": 0,
+    "state": {
+      "players": [
+        {"position": [1, 1], "orientation": [1, 0], "held_object": null},
+        {"position": [4, 1], "orientation": [-1, 0], "held_object": null}
+      ],
+      "objects": [],
+      "order_list": null
+    },
+    "human_action": 5,
+    "cole_action": 4,
+    "final_ai_action": 4,
+    "team_reward": 0,
+    "done": false,
+    "events": [{"event_type": "ingredient_acquired", "timestep": 0, "agent_index": 0, "details": {"ingredient": "onion", "source": "dispenser"}}]
+  }]]
+}

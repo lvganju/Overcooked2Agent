@@ -1,0 +1,100 @@
+{
+  "schema_version": "cole_task_intent_v0.2_formal_real_model",
+  "total_rows": 3200,
+  "num_classification_rows": 3080,
+  "classification_row_ratio": 0.9625,
+  "label_counts_overall": {
+    "get_ingredient": 992,
+    "no_commitment": 339,
+    "put_in_pot": 929,
+    "get_plate": 319,
+    "plate_food": 327,
+    "deliver": 174,
+    "unknown/invalid": 120
+  },
+  "label_counts_classification_only": {
+    "get_ingredient": 992,
+    "no_commitment": 339,
+    "put_in_pot": 929,
+    "get_plate": 319,
+    "plate_food": 327,
+    "deliver": 174
+  },
+  "class_imbalance_ratio_max_over_min": 5.701,
+  "label_counts_by_subject_id": {
+    "real_model_selfplay_SP": {
+      "get_ingredient": 992,
+      "no_commitment": 339,
+      "put_in_pot": 929,
+      "get_plate": 319,
+      "plate_food": 327,
+      "deliver": 174,
+      "unknown/invalid": 120
+    }
+  },
+  "avg_history_window_coverage": 0.995,
+  "splits_summary": {
+    "train": {
+      "num_episodes": 6,
+      "num_rows": 2400,
+      "label_counts": {
+        "get_ingredient": 765,
+        "no_commitment": 256,
+        "put_in_pot": 713,
+        "get_plate": 217,
+        "plate_food": 234,
+        "deliver": 125,
+        "unknown/invalid": 90
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_SP": 2400
+      },
+      "episode_ids": [
+        "real-sp-random1-3002",
+        "real-sp-random1-3003",
+        "real-sp-random1-3004",
+        "real-sp-random1-3005",
+        "real-sp-random1-3006",
+        "real-sp-random1-3007"
+      ]
+    },
+    "val": {
+      "num_episodes": 1,
+      "num_rows": 400,
+      "label_counts": {
+        "get_ingredient": 106,
+        "put_in_pot": 108,
+        "no_commitment": 47,
+        "get_plate": 52,
+        "plate_food": 45,
+        "deliver": 27,
+        "unknown/invalid": 15
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-sp-random1-3000"
+      ]
+    },
+    "test": {
+      "num_episodes": 1,
+      "num_rows": 400,
+      "label_counts": {
+        "get_ingredient": 121,
+        "put_in_pot": 108,
+        "get_plate": 50,
+        "plate_food": 48,
+        "deliver": 22,
+        "no_commitment": 36,
+        "unknown/invalid": 15
+      },
+      "subject_row_counts": {
+        "real_model_selfplay_SP": 400
+      },
+      "episode_ids": [
+        "real-sp-random1-3001"
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "cole_task_intent_v0.2",
+  "get_ingredient": 0,
+  "put_in_pot": 1,
+  "get_plate": 2,
+  "plate_food": 3,
+  "deliver": 4,
+  "no_commitment": 5,
+  "unknown/invalid": -1
+}

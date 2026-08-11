@@ -1,0 +1,14 @@
+{
+  "episode_id": "smoke-simple-1004",
+  "layout_id": "simple",
+  "seed": 1004,
+  "human_index": 0,
+  "ego_agent_idx": 0,
+  "horizon": 400,
+  "policy_id": "random_scripted",
+  "status": "valid",
+  "termination_reason": "environment_done",
+  "steps_recorded": 400,
+  "trajectory_path": "C:\\Users\\36724\\PycharmProjects\\WelcomeScreen\\Overcooked2Agent\\02_数据组\\data_pipeline\\smoke_raw\\random\\smoke-simple-1004.trajectory.jsonl",
+  "elapsed_seconds": 0.2716681957244873
+}

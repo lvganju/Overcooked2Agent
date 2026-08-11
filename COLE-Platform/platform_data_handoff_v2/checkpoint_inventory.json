@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED_MISSING_INPUT",
+  "models_directory": "models",
+  "models_directory_exists": false,
+  "checkpoint_count": 0,
+  "cole_inference_verified": false,
+  "weights_modified": false,
+  "training_run": false,
+  "required_resolution": [
+    "Provide the official frozen COLE checkpoint directory",
+    "Record checkpoint paths, layout IDs, file sizes, and SHA-256 hashes",
+    "Run one fixed-state inference sample and record cole_action and latency"
+  ]
+}

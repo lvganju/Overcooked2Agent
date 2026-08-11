@@ -1,0 +1,16 @@
+{
+  "episode_id": "submission-smoke-001",
+  "layout_id": "simple",
+  "seed": 7,
+  "human_index": 0,
+  "ego_agent_idx": 0,
+  "horizon": 10,
+  "status": "valid",
+  "termination_reason": "horizon_reached",
+  "steps_recorded": 10,
+  "trajectory_path": "C:\\Users\\admin\\Desktop\\zzz\\COLE-Platform-main\\COLE-Platform-main\\platform_data_handoff_v2\\single_episode_sample\\submission-smoke-001.trajectory.jsonl",
+  "controller_enabled": false,
+  "models_loaded": false,
+  "training_run": false,
+  "elapsed_seconds": 0.021285533905029297
+}

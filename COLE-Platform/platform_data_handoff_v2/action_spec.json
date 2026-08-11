@@ -1,0 +1,42 @@
+{
+  "spec_version": "action_spec_v1",
+  "status": "frozen_from_source",
+  "num_actions": 6,
+  "action_space": "Discrete(6)",
+  "index_to_action": [
+    {"index": 0, "name": "up", "internal_value": [0, -1]},
+    {"index": 1, "name": "down", "internal_value": [0, 1]},
+    {"index": 2, "name": "right", "internal_value": [1, 0]},
+    {"index": 3, "name": "left", "internal_value": [-1, 0]},
+    {"index": 4, "name": "stay", "internal_value": [0, 0]},
+    {"index": 5, "name": "interact", "internal_value": "interact"}
+  ],
+  "joint_action_order": {
+    "description": "ep_actions stores [player_0_action, player_1_action] in real environment player-index order",
+    "player_indices": [0, 1]
+  },
+  "recorder_semantics": {
+    "human_index": "Index of the focal player policy; in automated experiments this does not imply a real human",
+    "human_action": "Action chosen by the focal player policy",
+    "cole_action": "Unmodified action proposed by the frozen COLE policy",
+    "final_ai_action": "AI action actually sent to the environment",
+    "controller_disabled_invariant": "final_ai_action == cole_action"
+  },
+  "authoritative_sources": [
+    {
+      "path": "overcookedgym/human_aware_rl/overcooked_ai/overcooked_ai_py/mdp/actions.py",
+      "sha256": "FD9437627BC733DD95CD4E8EA78A882B211B899C750574DF3C19AC76259E3823",
+      "symbols": ["Direction", "Action.INDEX_TO_ACTION", "Action.ACTION_TO_INDEX"]
+    },
+    {
+      "path": "overcookedgym/overcooked-flask/app.py",
+      "sha256": "8959A99B7F46A37E15813585DFEE897CA347C6CFD5273F74EB165800A8FA89EE",
+      "symbols": ["ACTION_ID_TRANSLATION", "BC_ACTION_TRANSLATION"]
+    }
+  ],
+  "verification": {
+    "command": "python -B overcookedgym/scripts/verify_trajectory_schema_v2.py",
+    "result": "PASS",
+    "checked_against_original_actions_py": true
+  }
+}
